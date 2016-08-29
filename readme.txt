@@ -10,8 +10,6 @@ to the latest version available on curse on a Windows machine.
         eg: Deadly Boss Mods curse page is "https://mods.curse.com/addons/wow/deadly-boss-mods"
         so the entry for url_partial on Deadly Boss Mods is "deadly-boss-mods"
     c. Columns v_installed, v_available and up_to_date can be left empty
-3) Set one variables in this script before running
-    a. wow_addon_directory
-
+3) Set "wow_addon_directory" variable in this script before running
 4) Run script and play WoW
 --------------------
