@@ -8,14 +8,21 @@ import wget
 
 class addonUpdater():
 
-    dloads_path = r"C:\example\dloads"
     wow_addon_directory = r"F:\World of Warcraft\Interface\AddOns\\"
-    os.chdir(dloads_path)
     path = os.getcwd()
     db_file = "{0}\\addons.db".format(os.path.dirname(os.getcwd()))
     wow_path = wow_addon_directory[:-1]
 
+    def download_path(self):
+        dloads_path = "{0}\\dloads".format(self.path)
+        if os.path.exists(dloads_path):
+            os.chdir(dloads_path)
+        else:
+            os.mkdir(dloads_path)
+            os.chdir(dloads_path)
+
     def main(self):
+        self.download_path()
         self.db_connect()
         self.db_select_all_data()
         self.select_out_of_date()
@@ -52,14 +59,10 @@ class addonUpdater():
 
     def download_zip_file_page(self):
         url = "https://mods.curse.com/addons/wow/{0}/download".format(self.url_partial)
-        counter = 1
         r = requests.get(url)
         page_text = r.text
         link = re.findall("http://.*\.zip", page_text)[0]
         wget.download(link)
-
-    def quit_all(self):
-        sys.exit()
 
     def version_update(self):
         url = "https://mods.curse.com/addons/wow/{0}".format(self.url_partial)
