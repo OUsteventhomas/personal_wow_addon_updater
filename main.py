@@ -10,7 +10,6 @@ class addonUpdater():
 
     wow_addon_directory = r"F:\World of Warcraft\Interface\AddOns\\"
     path = os.getcwd()
-    db_file = "{0}\\addons.db".format(os.path.dirname(os.getcwd()))
     wow_path = wow_addon_directory[:-1]
 
     def download_path(self):
@@ -20,6 +19,7 @@ class addonUpdater():
         else:
             os.mkdir(dloads_path)
             os.chdir(dloads_path)
+        self.db_file = "{0}\\addons.db".format(os.path.dirname(os.getcwd()))
 
     def main(self):
         self.download_path()
