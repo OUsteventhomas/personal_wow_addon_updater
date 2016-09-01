@@ -62,6 +62,7 @@ class addonUpdater():
         r = requests.get(url)
         page_text = r.text
         link = re.findall("http://.*\.zip", page_text)[0]
+        print("Downloading: {0}".format(self.name))
         wget.download(link)
 
     def version_update(self):
