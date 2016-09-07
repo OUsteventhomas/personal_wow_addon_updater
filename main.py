@@ -62,6 +62,7 @@ class addonUpdater():
         r = requests.get(url)
         page_text = r.text
         link = re.findall("http://.*\.zip", page_text)[0]
+        print("Downloading: {0}".format(self.name))
         wget.download(link)
 
     def version_update(self):
@@ -69,11 +70,12 @@ class addonUpdater():
         r = requests.get(url)
         data = r.text
         self.newest_version = re.sub("Newest File: ", "", re.findall("Newest File:.*\<", data)[0][:-1])
-        if self.newest_version != self.cur_version:
+        if self.newest_version != self.cur_version or self.cur_version == "":
             self.db_version_update()
 
     def db_version_update(self):
-        update_query = "UPDATE info SET v_available = '{0}' WHERE url_partial = '{1}'".format(self.newest_version, self.url_partial)
+        update_query = "UPDATE info SET v_available = '{0}' WHERE url_partial = '{1}'".format(self.newest_version,
+                                                                                              self.url_partial)
         self.conn.execute(update_query)
         self.commit_db_changes
 
