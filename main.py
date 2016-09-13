@@ -55,6 +55,7 @@ class addonUpdater():
         cursor = self.conn.execute("SELECT * FROM info WHERE up_to_date = '0'")
         for row in cursor:
             self.url_partial = row[1]
+            self.name = row[0]
             self.download_zip_file_page()
 
     def download_zip_file_page(self):
